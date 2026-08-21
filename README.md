@@ -2,32 +2,36 @@
 
 Standalone multi-agent reference architecture for retrieval-augmented generation with explicit ingestion, retrieval, reranking/context, grounding/citation, and evaluation stages.
 
-## Repository map
+## Architecture
 
 ```text
-.github/workflows/tests.yml
-src/agents.py
-src/state.py
-src/gates.py
-src/orchestrator.py
-src/system.py
-src/run.py
-evals/evaluator.py
-examples/rag_case.json
-benchmarks/README.md
-docs/ARCHITECTURE.md
-tests/
-SECURITY.md
-CONTRIBUTING.md
-CITATION.cff
-CHANGELOG.md
-CODE_OF_CONDUCT.md
-LICENSE
-pyproject.toml
+src/
+├── agents/          Ingestion, Retrieval, Context, Grounding, Evaluation agents
+├── tools/           deterministic RAG evidence and record builders
+├── skills/          reusable RAG reasoning procedures
+├── memory/          retrieval memory
+├── schemas/         RAG evidence contracts
+├── prompts/         grounding principles
+├── config/          grounding and citation thresholds
+├── safety/          grounded-release policy
+├── observability/   trace summaries
+├── state.py
+├── gates.py
+├── orchestrator.py
+├── system.py
+└── run.py
 ```
 
-## Multi-agent team
-Ingestion Agent, Retrieval Agent, Reranking/Context Agent, Grounding and Citation Agent, Evaluation Agent, and RAG Orchestrator.
+### Agents
+Ingestion Agent, Retrieval Agent, Reranking/Context Agent, Grounding and Citation Agent, Evaluation Agent, coordinated by the RAG Orchestrator.
+
+### Skills
+Ingestion planning, retrieval assessment, context selection, grounding verification, answer evaluation.
+
+### Tools
+Ingestion record, retrieval record, reranking/context record, grounding record, evaluation record.
+
+See `docs/AGENTS_TOOLS_SKILLS.md`.
 
 ```bash
 python -m src.run --example
